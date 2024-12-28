@@ -18,7 +18,6 @@ import kotlin.random.Random
 fun DashboardUI() {
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFF1E1E1E))) {
         Header(title = "智慧大屏 - 服务器运行状况")
-        SystemInfoPanel()
         Spacer(modifier = Modifier.height(16.dp))
         RealTimeCharts()
         Spacer(modifier = Modifier.height(16.dp))
@@ -57,7 +56,7 @@ fun Header(title: String) {
     }
 }
 
-@Composable
+/*@Composable
 fun SystemInfoPanel() {
     Row(
         modifier = Modifier
@@ -73,7 +72,7 @@ fun SystemInfoPanel() {
         Spacer(modifier = Modifier.width(16.dp))
         SystemInfoCard("磁盘使用率", "72%", Color(0xFFEF5350))
     }
-}
+}*/
 
 @Composable
 fun SystemInfoCard(title: String, value: String, color: Color) {

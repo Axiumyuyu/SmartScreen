@@ -10,5 +10,6 @@ fun main() = application {
         title = "SmartScreen",
     ) {
         DashboardUI()
+
     }
 }

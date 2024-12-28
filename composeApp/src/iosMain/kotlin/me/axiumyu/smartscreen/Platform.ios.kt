@@ -7,3 +7,11 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+actual fun getMemoryUsage(): Float {
+    TODO("Not yet implemented")
+}
+
+actual fun getCpuUsage(): Float {
+    TODO("Not yet implemented")
+}

@@ -84,6 +84,7 @@ android {
 dependencies {
     implementation(libs.androidx.ui.geometry.jvmstubs)
     implementation(libs.androidx.ui.desktop)
+    implementation(libs.firebase.functions.ktx)
     debugImplementation(compose.uiTooling)
 }
 
