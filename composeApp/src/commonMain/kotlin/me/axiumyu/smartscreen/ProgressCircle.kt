@@ -16,7 +16,7 @@ fun CircularProgressIndicator(
     percentage: Float, // 占比（0.0 到 1.0）
     title: String,
     color: Color,
-    size: Float = 100f // 圆环直径
+    size: Float = 150f // 圆环直径
 ) {
     Box(
         modifier = Modifier

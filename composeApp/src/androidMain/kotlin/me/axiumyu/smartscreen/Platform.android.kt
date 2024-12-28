@@ -1,14 +1,13 @@
 
 package me.axiumyu.smartscreen
 
-import android.os.Build
 import android.app.ActivityManager
 import android.content.Context
-import androidx.core.content.ContextCompat.getSystemService
-import java.io.BufferedReader
-import java.io.FileReader
+import android.os.Build
 import java.io.IOException
 import java.io.RandomAccessFile
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AndroidPlatform : Platform {
     override val name: String = "Android ${Build.VERSION.SDK_INT}"
@@ -42,11 +41,6 @@ actual fun getCpuUsage(): Float {
     return 0f
 }
 
-fun getActivityManager(): ActivityManager {
-    val context = AndroidContextProvider.context
-    return context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-}
-
 actual fun getMemoryUsage(): Float {
     val am = getActivityManager()
     val mi = ActivityManager.MemoryInfo()
@@ -55,6 +49,12 @@ actual fun getMemoryUsage(): Float {
     return (mi.availMem/1024/1024).toFloat()// 将获取的内存大小规格化
 }
 
+fun getActivityManager(): ActivityManager {
+    val context = AndroidContextProvider.context
+    return context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+}
+
+/*
 fun getTotalMemory(): Long {
     val str1 = "/proc/meminfo" // 系统内存信息文件
     val str2: String?
@@ -77,4 +77,9 @@ fun getTotalMemory(): Long {
         e.printStackTrace()
     }
     return initialMemory/1024/1024 // Byte转换为KB或者MB，内存大小规格化
+}
+*/
+actual fun getCurrentTime(): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    return formatter.format(Date())
 }

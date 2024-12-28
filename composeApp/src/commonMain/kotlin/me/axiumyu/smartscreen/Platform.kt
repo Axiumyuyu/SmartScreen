@@ -6,7 +6,9 @@ interface Platform {
 
 expect fun getPlatform(): Platform
 
-// commonMain
 expect fun getCpuUsage(): Float
 
 expect fun getMemoryUsage(): Float
+
+expect fun getCurrentTime(): String
+

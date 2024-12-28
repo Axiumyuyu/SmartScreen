@@ -15,3 +15,7 @@ actual fun getMemoryUsage(): Float {
 actual fun getCpuUsage(): Float {
     TODO("Not yet implemented")
 }
+
+actual fun getCurrentTime(): String {
+    TODO("Not yet implemented")
+}

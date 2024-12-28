@@ -11,20 +11,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
+import me.axiumyu.smartscreen.LineChart
+import me.axiumyu.smartscreen.getCpuUsage
+import me.axiumyu.smartscreen.getCurrentTime
+import me.axiumyu.smartscreen.getMemoryUsage
 import kotlin.random.Random
 
+//主UI
+val cpu_usage = listOf(0.22, 0.25,0.19,0.24, 0.34, 0.41,0.40, 0.35, 0.29, 0.22, 0.18, 0.16, 0.15, 0.18, 0.18, 0.19, 0.16, 0.22, 0.23, 0.22, 0.20, 0.18)
 
 @Composable
 fun DashboardUI() {
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFF1E1E1E))) {
-        Header(title = "智慧大屏 - 服务器运行状况")
+        /*Header(title = "智慧大屏 - 服务器运行状况")
         Spacer(modifier = Modifier.height(16.dp))
         RealTimeCharts()
         Spacer(modifier = Modifier.height(16.dp))
+        AlarmLog()*/
+        Header(title = "智慧大屏 - 服务器运行状况")
+//        SystemInfoPanel()
+        Spacer(modifier = Modifier.height(16.dp))
+        RealTimeCharts()
+        Spacer(modifier = Modifier.height(16.dp))
+        LineChart(cpu_usage.map { it.toFloat() })
         AlarmLog()
     }
 }
 
+//UI头
 @Composable
 fun Header(title: String) {
     Row(
@@ -43,8 +58,8 @@ fun Header(title: String) {
         var currentTime by remember { mutableStateOf("Loading...") }
         LaunchedEffect(Unit) {
             while (true) {
-                currentTime = "Time:"
-                kotlinx.coroutines.delay(1000)
+                currentTime = getCurrentTime()
+                delay(1000)
             }
         }
         Text(
@@ -56,6 +71,23 @@ fun Header(title: String) {
     }
 }
 
+@Composable
+fun SystemInfoPanel() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .background(Color(0xFF383838))
+            .border(1.dp, Color.Gray)
+            .padding(16.dp)
+    ) {
+        ChartCard("CPU 使用率",  Color(0xFF42A5F5)) { getCpuUsage() }
+        Spacer(modifier = Modifier.width(16.dp))
+        ChartCard("内存使用率", Color(0xFF66BB6A)){ getMemoryUsage()}
+        /*Spacer(modifier = Modifier.width(16.dp))
+        SystemInfoCard("磁盘使用率", "72%", Color(0xFFEF5350))*/
+    }
+}
 /*@Composable
 fun SystemInfoPanel() {
     Row(
@@ -74,11 +106,12 @@ fun SystemInfoPanel() {
     }
 }*/
 
+/*
 @Composable
 fun SystemInfoCard(title: String, value: String, color: Color) {
     Column(
         modifier = Modifier
-//            .weight(1f)
+            .fillMaxWidth()
             .background(color.copy(alpha = 0.2f))
             .padding(16.dp)
     ) {
@@ -95,29 +128,32 @@ fun SystemInfoCard(title: String, value: String, color: Color) {
         )
     }
 }
+*/
 
 @Composable
 fun RealTimeCharts() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 32.dp)
     ) {
-        ChartCard("CPU 实时状态", Color(0xFF42A5F5)) { Random.nextInt(20, 80) }
+//        ChartCard("CPU 实时状态", Color(0xFF42A5F5)) { getCpuUsage() }
+        CircularProgressIndicator(getCpuUsage(),"CPU 实时状态", Color(0xFF42A5F5))
         Spacer(modifier = Modifier.width(16.dp))
-        ChartCard("内存实时状态", Color(0xFF66BB6A)) { Random.nextInt(40, 90) }
+        CircularProgressIndicator(getMemoryUsage(),"内存实时状态", Color(0xFF66BB6A))
+//        ChartCard("内存实时状态", Color(0xFF66BB6A)) { getMemoryUsage() }
     }
 }
 
 @Composable
-fun ChartCard(title: String, lineColor: Color, valueProvider: () -> Int) {
-    val values = remember { mutableStateListOf<Int>() }
+fun ChartCard(title: String, lineColor: Color, valueProvider: () -> Float) {
+    val values = remember { mutableStateListOf<Float>() }
 
     LaunchedEffect(Unit) {
         while (true) {
             values.add(valueProvider())
             if (values.size > 20) values.removeAt(0)
-            kotlinx.coroutines.delay(1000)
+            delay(1000)
         }
     }
 
@@ -172,3 +208,39 @@ fun AlarmLog() {
         }
     }
 }
+
+
+/*@Composable
+fun RealtimeSystemStatus() {
+    // 定义状态
+    var cpuUsage by remember { mutableStateOf(0.0f) }
+    var memoryUsage by remember { mutableStateOf(0.0f) }
+
+    // 定时更新状态
+    LaunchedEffect(Unit) {  // 启动一个协程，定时更新状态
+        while (true) {
+            cpuUsage = getCpuUsage()
+            memoryUsage = getMemoryUsage()
+            delay(1000) // 每秒更新一次
+        }
+    }
+
+    // 显示圆环和数据
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        CircularProgressIndicator(
+            percentage = cpuUsage,
+            title = "CPU 使用率",
+            color = Color(0xFF42A5F5)
+        )
+        CircularProgressIndicator(
+            percentage = memoryUsage,
+            title = "内存使用率",
+            color = Color(0xFF66BB6A)
+        )
+    }
+}*/

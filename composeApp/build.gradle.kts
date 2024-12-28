@@ -32,12 +32,13 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
-        
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kandy.lets.plot)
         }
         commonMain.dependencies {
+            implementation(libs.kandy.lets.plot)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -48,6 +49,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
         }
         desktopMain.dependencies {
+            implementation(libs.kandy.lets.plot)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
@@ -82,9 +84,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.kandy.lets.plot)
     implementation(libs.androidx.ui.geometry.jvmstubs)
     implementation(libs.androidx.ui.desktop)
     implementation(libs.firebase.functions.ktx)
+    implementation(libs.androidx.core.i18n)
     debugImplementation(compose.uiTooling)
 }
 

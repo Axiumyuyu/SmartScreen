@@ -13,13 +13,18 @@ androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
 junit = "4.13.2"
+kandy = "latest-version"
+kandyLetsPlot = "0.8.0-RC1"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.9.0"
 uiGeometryJvmstubs = "1.7.6"
 uiDesktop = "1.7.0"
 firebaseFunctionsKtx = "21.1.0"
+coreI18n = "1.0.0-alpha01"
 
 [libraries]
+kandy = { module = "io.github.kandy-graph:kandy", version.ref = "kandy" }
+kandy-lets-plot = { module = "org.jetbrains.kotlinx:kandy-lets-plot", version.ref = "kandyLetsPlot" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +41,7 @@ kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-co
 androidx-ui-geometry-jvmstubs = { group = "androidx.compose.ui", name = "ui-geometry-jvmstubs", version.ref = "uiGeometryJvmstubs" }
 androidx-ui-desktop = { group = "androidx.compose.ui", name = "ui-desktop", version.ref = "uiDesktop" }
 firebase-functions-ktx = { group = "com.google.firebase", name = "firebase-functions-ktx", version.ref = "firebaseFunctionsKtx" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
