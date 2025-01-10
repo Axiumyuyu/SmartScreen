@@ -19,7 +19,7 @@ import me.axiumyu.smartscreen.getMemoryUsage
 import kotlin.random.Random
 
 //主UI
-val cpu_usage = listOf(0.22, 0.25,0.19,0.24, 0.34, 0.41,0.40, 0.35, 0.29, 0.22, 0.18, 0.16, 0.15, 0.18, 0.18, 0.19, 0.16, 0.22, 0.23, 0.22, 0.20, 0.18)
+val cpu_usage = listOf(0.22, 0.25,0.19,0.24, 0.34, 0.41,0.40, 0.35, 0.29, 0.22, 0.18, 0.16, 0.15, 0.18, 0.18, 0.29, 0.26, 0.22, 0.23, 0.22, 0.20, 0.18)
 
 @Composable
 fun DashboardUI() {
